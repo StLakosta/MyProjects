@@ -14,7 +14,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram import types
 import openai
 from keyboards.admin_keyboard import admin_menu
-openai.api_key = "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"
+openai.api_key = ""
 model_engine = 'text-davinci-003'
 
 @rate_limit(limit=2)
