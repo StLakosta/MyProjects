@@ -1,7 +1,7 @@
 import aiosqlite, logging, traceback, string, random, time
 from aiogram import types
 
-path_to_db = 'data/base/fleen_stickers.sqlite'
+path_to_db = 'data/base/stickers.sqlite'
 
 async def user_link(user_id, first_name):
     text = f"<a href='tg://user?id={user_id}'>{first_name}</a>"

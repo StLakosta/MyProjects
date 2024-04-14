@@ -112,9 +112,7 @@ async def rand_stick(message: types.Message, state: FSMContext):
 			test_pack = await bot.get_sticker_set(name=rack)
 			pack = test_pack.stickers
 			await bot.send_sticker(message.from_user.id, pack[0].file_id, reply_markup=await rand_sticker_pack_menu(rack))
-			#await add_rand_stickerpack.name.set()
 
-			#await message.answer('Введите название существующего стикерпака')
 		except:
 			await message.answer('Набор пока пуст, дождитесь пока администратор добавит наборы')
 	else:
@@ -178,16 +176,6 @@ async def check_sub_handler(c: types.CallbackQuery, state: FSMContext):
 	else:
 		await bot.send_message(c.from_user.id, await dont_sub_message(), reply_markup=await sub(c.from_user.id))
 
-# @dp.message_handler(state=add_sticker_state.emoji)
-# async def start(message: types.message, state: FSMContext):
-# 	async with state.proxy() as data:
-# 		data['emoji'] = message.text[0]
-#
-# 	if await subscribed(message.from_user.id):
-# 		await add_sticker_state.next()
-# 		await bot.send_message(message.from_user.id, f'📝 <i>Пришлите фото, для создания стикера:</i>')
-# 	else:
-# 		await bot.send_message(message.from_user.id, await dont_sub_message(), reply_markup=await sub(message.from_user.id))
 
 @dp.message_handler(state=add_sticker_state.sticker, content_types=[ContentType.PHOTO])
 async def start(message: types.Message, state: FSMContext):
@@ -227,8 +215,7 @@ async def start(message: types.Message, state: FSMContext):
 
 		await message.answer('✅<b> Успешно! </b>✅')
 		await bot.send_message(message.from_user.id, f'👇🏻 <i>Выберите, что хотите сделать с набором стикеров (<code>{name}</code>):</i>', reply_markup=await sticker_pack_menu(name,message.from_user.id))
-		#except:
-			#await message.answer('Были введены некорректные данные, повторите попытку', reply_markup=await sticker_packs_menu(message.from_user.id))
+
 	else:
 		await bot.send_message(message.from_user.id, await dont_sub_message(), reply_markup=await sub(message.from_user.id))
 
@@ -276,25 +263,6 @@ async def check_sub_handler(c: types.CallbackQuery, state: FSMContext):
 	else:
 		await bot.send_message(c.from_user.id, await dont_sub_message(), reply_markup=await sub(c.from_user.id))
 
-#@dp.callback_query_handler(lambda c: 'color_' in c.data, state=global_state.color)
-#async def check_sub_handler(c: types.CallbackQuery, state: FSMContext):
-	# colors = {
-	# 	'⬜️': [(255, 255, 255), (200, 200, 200)],
-	# 	'⬛️': [(0, 0, 0), (50, 50, 50)],
-	# 	'🟦': [(0, 0, 255), (0, 0, 200)],
-	# 	'🟩': [(0, 255, 0), (0, 200, 0)],
-	# 	'🟨': [(255, 194, 0), (255, 170, 0)],
-	# 	'🟥': [(255, 0, 0), (200, 0, 0)]
-	# }
-	# async with state.proxy() as data:
-	# 	data['color'] = colors[c.data.replace('color_', '')]
-	#
-	# await c.message.delete()
-	# if await subscribed(c.from_user.id):
-	# 	await global_state.next()
-	# 	await bot.send_message(c.from_user.id, '📝 <i>Отправь текст:</i>')
-	# else:
-	# 	await bot.send_message(c.from_user.id, await dont_sub_message(), reply_markup=await sub(c.from_user.id))
 
 @dp.message_handler(state=global_state.thing, content_types=[ContentType.PHOTO, ContentType.TEXT])
 async def global_state_st(message: types.message, state: FSMContext):
@@ -402,18 +370,3 @@ async def check_sub_handler(c: types.CallbackQuery, state: FSMContext):
 @dp.message_handler(text = "/chat_id", state = "*")
 async def chat_id(message: types.Message, state: FSMContext):
 	await message.answer(f'🌀 <b>Chat ID is:</b> <code>{message.chat.id}</code>')
-
-# @dp.chat_join_request_handler()
-# async def echo(message: types.Message):
-# 	try:
-# 		await bot.approve_chat_join_request(message.chat.id, message.from_user.id)
-# 		user = await get_user(message.from_user.id)
-# 		if user is None:
-# 			await register_user(message.from_user.id, time.time())
-# 		try:
-# 			await bot.send_message(message.from_user.id, stats_text, reply_markup=await inline_menu(), disable_web_page_preview=True)
-# 		except Exception as e:
-# 			#print(e)
-# 			pass
-# 	except:
-# 		pass

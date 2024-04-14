@@ -39,7 +39,6 @@ async def st_packs_menu():
 async def sticker_packs_menu(user_id):
 	keyboard = InlineKeyboardMarkup(row_width=3)
 
-	#keyboard.add(InlineKeyboardButton(f'🚛 Создать набор стикеров', callback_data='create_sticker_pack'))
 	result = []
 	data = await get_sticker_packs(user_id)
 	for el in data:
