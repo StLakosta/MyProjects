@@ -1,7 +1,7 @@
 # - *- coding: utf- 8 - *-
 import aiosqlite, logging, traceback, datetime, string, random
 
-path_to_db = 'data/chatbot.sqlite'
+path_to_db = 'data/dataset.sqlite'
 
 
 async def user_link(user_id, first_name):
